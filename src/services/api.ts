@@ -1,6 +1,6 @@
 import { SecurityService } from './security';
 
-const API_BASE_URL = ''; // Caminho relativo para o mesmo domínio
+const API_BASE_URL = ''; // Caminho relativo agora tratado nos endpoints individuais
 
 export class ApiService {
   private static async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {

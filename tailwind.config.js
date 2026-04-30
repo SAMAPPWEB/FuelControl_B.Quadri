@@ -82,12 +82,12 @@ export default {
       },
       boxShadow: {
         xs: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-        gold: "0 0 50px rgba(191, 149, 63, 0.4), 0 0 20px rgba(191, 149, 63, 0.2)",
-        "gold-sm": "0 2px 12px rgba(201, 162, 39, 0.2)",
-        "neon-blue": "0 0 20px rgba(0, 212, 255, 0.3)",
-        "neon-green": "0 0 20px rgba(0, 255, 136, 0.3)",
-        "neon-red": "0 0 20px rgba(255, 68, 68, 0.3)",
-        brand: "0 10px 30px -10px rgba(37, 99, 235, 0.5)",
+        gold: "0 0 25px rgba(191, 149, 63, 0.15), 0 0 10px rgba(191, 149, 63, 0.1)",
+        "gold-sm": "0 2px 12px rgba(201, 162, 39, 0.1)",
+        "neon-blue": "0 0 10px rgba(0, 212, 255, 0.15)",
+        "neon-green": "0 0 10px rgba(0, 255, 136, 0.15)",
+        "neon-red": "0 0 10px rgba(255, 68, 68, 0.15)",
+        brand: "0 10px 20px -10px rgba(37, 99, 235, 0.25)",
       },
       backgroundImage: {
         "brand-gradient": "linear-gradient(135deg, #2563EB 0%, #7C3AED 100%)",

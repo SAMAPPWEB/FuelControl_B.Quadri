@@ -79,7 +79,7 @@ export default function Login({ onLogin }: LoginProps) {
           <motion.div
             initial={{ y: -20 }}
             animate={{ y: 0 }}
-            className="w-20 h-20 bg-gradient-to-br from-[#BF953F] via-[#FCF6BA] to-[#B38728] p-4 rounded-3xl shadow-[0_0_20px_rgba(191,149,63,0.4)] mb-6 flex items-center justify-center"
+            className="w-20 h-20 bg-gradient-to-br from-[#BF953F] via-[#FCF6BA] to-[#B38728] p-4 rounded-3xl shadow-[0_0_10px_rgba(191,149,63,0.15)] mb-6 flex items-center justify-center"
           >
             <ShieldCheck size={40} className="text-black" />
           </motion.div>
@@ -160,7 +160,7 @@ export default function Login({ onLogin }: LoginProps) {
             <button
               type="submit"
               disabled={loading || waitTime > 0}
-              className="w-full bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] text-black font-black text-sm uppercase tracking-widest py-4 rounded-2xl shadow-[0_0_20px_rgba(191,149,63,0.3)] hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-50"
+              className="w-full bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] text-black font-black text-sm uppercase tracking-widest py-4 rounded-2xl shadow-[0_0_10px_rgba(191,149,63,0.1)] hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-50"
             >
               {loading ? (
                 <div className="flex items-center justify-center gap-2">

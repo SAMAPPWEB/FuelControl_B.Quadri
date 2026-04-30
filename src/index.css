@@ -67,9 +67,9 @@
   }
 
   .neon-gold-hover:hover, .neon-gold:hover {
-    border-color: rgba(191, 149, 63, 0.4);
-    box-shadow: 0 0 15px rgba(191, 149, 63, 0.1), inset 0 0 10px rgba(252, 246, 186, 0.05);
-    transform: translateY(-2px);
+    border-color: rgba(191, 149, 63, 0.5);
+    box-shadow: 0 0 15px rgba(191, 149, 63, 0.1), inset 0 0 8px rgba(252, 246, 186, 0.05);
+    transform: translateY(-1px);
   }
 
   .text-gradient-gold {
