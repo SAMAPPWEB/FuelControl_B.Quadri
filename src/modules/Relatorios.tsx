@@ -304,7 +304,7 @@ export default function Relatorios() {
                         <Fuel size={20} />
                       </div>
                       <div>
-                        <p className="text-sm font-black text-foreground">{a.combustivelNome}</p>
+                        <p className="text-sm font-black text-foreground">{a.tipoCombustivelNome}</p>
                         <p className="text-[10px] text-dark-muted font-bold uppercase tracking-widest">
                           {new Date(a.createdAt).toLocaleDateString('pt-BR')} • {new Date(a.createdAt).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
                         </p>
