@@ -7,7 +7,7 @@ export interface Usuario {
   id: string;
   nome: string;
   apelido: string;
-  whatsapp: string;
+  whatsapp?: string;
   email: string;
   senhaHash: string;
   funcao: string;

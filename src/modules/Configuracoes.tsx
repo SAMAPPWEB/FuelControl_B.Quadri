@@ -157,8 +157,14 @@ function UsuariosConfig() {
       delete updates.senha;
       updateUsuario(editing.id, updates);
     } else {
-      const hash = SecurityService.hashPassword(form.senha || 'senha123');
-      createUsuario({ ...form, senhaHash: hash, modulos: ['abastecimento'] });
+      const { senha, ...userData } = form;
+      const hash = SecurityService.hashPassword(senha || 'senha123');
+      createUsuario({ 
+        ...userData, 
+        senhaHash: hash, 
+        modulos: ['abastecimento'],
+        whatsapp: '' 
+      });
     }
     setModalOpen(false);
     resetForm();
