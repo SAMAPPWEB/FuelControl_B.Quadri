@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users, Fuel, Truck, Building2, Pencil, Trash2, UserPlus,
-  Upload, Check, Shield, User,
+  Upload, Check, Shield, User, Plus, History as HistoryIcon, X,
   Save, Eye, EyeOff, LayoutGrid, Settings2, Sparkles, DollarSign
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -613,7 +613,7 @@ function CombustivelConfig() {
       <div className="glass-card p-8 rounded-[3rem] border border-white/5 space-y-6 neon-gold">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <History size={20} className="text-dark-muted" />
+            <HistoryIcon size={20} className="text-dark-muted" />
             <h4 className="text-lg font-black text-foreground uppercase tracking-tight">Histórico de Reabastecimento</h4>
           </div>
         </div>
