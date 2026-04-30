@@ -544,3 +544,5 @@ function PackageIcon(props: any) {
     </svg>
   )
 }
+
+export default DashboardLoja;

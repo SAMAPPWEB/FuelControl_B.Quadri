@@ -593,3 +593,5 @@ function Lock(props: any) {
     </svg>
   )
 }
+
+export default PDV;

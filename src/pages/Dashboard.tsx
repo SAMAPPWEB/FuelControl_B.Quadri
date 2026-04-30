@@ -334,3 +334,5 @@ function getSaudacao() {
   if (hora < 18) return 'Boa tarde';
   return 'Boa noite';
 }
+
+export default Dashboard;

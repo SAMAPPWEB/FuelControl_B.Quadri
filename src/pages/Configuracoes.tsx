@@ -795,3 +795,5 @@ function PremiumInput({ label, value, onChange, type = 'text', placeholder }: an
   );
 }
 
+
+export default Configuracoes;

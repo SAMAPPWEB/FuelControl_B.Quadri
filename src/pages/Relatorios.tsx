@@ -463,3 +463,5 @@ function PdfButton({ filtrados, empresa, periodo }: any) {
   );
 }
 
+
+export default Relatorios;

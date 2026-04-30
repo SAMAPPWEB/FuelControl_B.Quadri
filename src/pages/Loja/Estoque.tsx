@@ -395,3 +395,5 @@ function StatsCard({ label, value, icon: Icon, color }: any) {
     </div>
   );
 }
+
+export default Estoque;

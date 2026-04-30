@@ -371,3 +371,5 @@ function SummaryRow({ icon: Icon, label, value, highlight }: any) {
     </div>
   );
 }
+
+export default Abastecimento;
