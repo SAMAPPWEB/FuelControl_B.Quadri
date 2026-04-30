@@ -631,16 +631,17 @@ function CombustivelConfig() {
             </thead>
             <tbody className="divide-y divide-black/5">
               {historico.map(h => {
-                const fuel = combustiveis.find(f => f.id === h.fuelId);
+                const fuel = combustiveis.find(f => String(f.id) === String(h.fuelId));
                 return (
                   <tr key={h.id} className="group hover:bg-black/[0.02] transition-all">
                     <td className="py-4 px-4 text-xs font-bold text-dark-muted">{h.data}</td>
                     <td className="py-4 px-4">
                       <span className={cn(
                         "text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest",
-                        fuel?.nome === 'Gasolina' ? "bg-orange-500/10 text-orange-500" : "bg-blue-500/10 text-blue-500"
+                        fuel?.nome === 'Gasolina' ? "bg-orange-500/10 text-orange-500" : 
+                        fuel?.nome?.includes('Diesel') ? "bg-blue-500/10 text-blue-500" : "bg-black/5 text-dark-muted"
                       )}>
-                        {fuel?.nome}
+                        {fuel?.nome || 'Combustível'}
                       </span>
                     </td>
                     <td className="py-4 px-4 text-right text-sm font-black text-foreground">+{h.qtd} L</td>
