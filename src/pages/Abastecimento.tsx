@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { useData } from '@/hooks/useData';
 import { useAuth } from '@/hooks/useAuth';
 
-export function Abastecimento() {
+export default function Abastecimento() {
   const { combustiveis = [], createAbastecimento, refresh } = useData();
   const { usuario } = useAuth();
   const [step, setStep] = useState(1);
@@ -372,4 +372,3 @@ function SummaryRow({ icon: Icon, label, value, highlight }: any) {
   );
 }
 
-export default Abastecimento;

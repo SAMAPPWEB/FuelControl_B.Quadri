@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-export function DashboardLoja({ onScreenChange, caixaAberto }: { onScreenChange: (s: any) => void, caixaAberto: boolean }) {
+export default function DashboardLoja({ onScreenChange, caixaAberto }: { onScreenChange: (s: any) => void, caixaAberto: boolean }) {
   const [selectedSale, setSelectedSale] = useState<any>(null);
   const [showLockAlert, setShowLockAlert] = useState(false);
 
@@ -545,4 +545,3 @@ function PackageIcon(props: any) {
   )
 }
 
-export default DashboardLoja;

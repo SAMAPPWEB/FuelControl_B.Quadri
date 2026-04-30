@@ -11,7 +11,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { PdfService } from '@/services/pdf';
 import type { Abastecimento, Usuario } from '@/types';
 
-export function Relatorios() {
+export default function Relatorios() {
   const data = useData();
   
   const [filterOpen, setFilterOpen] = useState(false);
@@ -464,4 +464,3 @@ function PdfButton({ filtrados, empresa, periodo }: any) {
 }
 
 
-export default Relatorios;

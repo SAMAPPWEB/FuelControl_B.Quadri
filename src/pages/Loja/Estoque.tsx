@@ -25,7 +25,7 @@ const ESTOQUE_MOCK: ItemEstoque[] = [
   { id: '5', nome: 'Energético Monster', categoria: 'Bebidas', quantidade: 45, minimo: 20, precoCusto: 8.50, precoVenda: 12.90, ultimaEntrada: '2026-04-29' },
 ];
 
-export function Estoque() {
+export default function Estoque() {
   const [items, setItems] = useState<ItemEstoque[]>(ESTOQUE_MOCK);
   const [busca, setBusca] = useState('');
   const [openMenu, setOpenMenu] = useState<string | null>(null);
@@ -396,4 +396,3 @@ function StatsCard({ label, value, icon: Icon, color }: any) {
   );
 }
 
-export default Estoque;

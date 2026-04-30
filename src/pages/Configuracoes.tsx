@@ -10,7 +10,7 @@ import { useData } from '@/hooks/useData';
 import { SecurityService } from '@/services/security';
 import type { Perfil, StatusUsuario, GeneroAvatar } from '@/types';
 
-export function Configuracoes() {
+export default function Configuracoes() {
   const { loading } = useData();
   const [activeTab, setActiveTab] = useState<'usuarios' | 'combustivel' | 'empresa' | 'modulos'>('usuarios');
 
@@ -796,4 +796,3 @@ function PremiumInput({ label, value, onChange, type = 'text', placeholder }: an
 }
 
 
-export default Configuracoes;

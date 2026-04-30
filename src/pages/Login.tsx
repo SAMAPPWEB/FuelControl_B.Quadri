@@ -7,7 +7,7 @@ interface LoginProps {
   onLogin: (email: string, senha: string) => Promise<{ success: boolean; error?: string; waitTime?: number }>;
 }
 
-export function Login({ onLogin }: LoginProps) {
+export default function Login({ onLogin }: LoginProps) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [showSenha, setShowSenha] = useState(false);
@@ -195,4 +195,3 @@ export function Login({ onLogin }: LoginProps) {
   );
 }
 
-export default Login;

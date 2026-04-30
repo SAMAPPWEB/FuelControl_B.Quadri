@@ -7,7 +7,7 @@ interface ModuleSelectionProps {
   onSelect: (module: ModuleId) => void;
 }
 
-export function ModuleSelection({ availableModules, onSelect }: ModuleSelectionProps) {
+export default function ModuleSelection({ availableModules, onSelect }: ModuleSelectionProps) {
   const modules = [
     {
       id: 'loja' as ModuleId,

@@ -10,7 +10,7 @@ import { useData } from '@/hooks/useData';
 import { useAuth } from '@/hooks/useAuth';
 import type { AlertaEmergencial } from '@/types';
 
-export function Dashboard({ onScreenChange }: { onScreenChange?: (s: any) => void }) {
+export default function Dashboard({ onScreenChange }: { onScreenChange?: (s: any) => void }) {
   const { combustiveis = [], abastecimentos = [], alertas = [], marcarAlertaLido, loading } = useData();
   const { usuario } = useAuth();
   const [showAllAlerts, setShowAllAlerts] = useState(false);
@@ -335,4 +335,3 @@ function getSaudacao() {
   return 'Boa noite';
 }
 
-export default Dashboard;

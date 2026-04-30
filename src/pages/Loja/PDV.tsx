@@ -25,7 +25,7 @@ const PRODUTOS_MOCK: Produto[] = [
   { id: '6', nome: 'Pastilha Halls', preco: 2.50, categoria: 'Doces', estoque: 50 },
 ];
 
-export function PDV({ caixaAberto, setCaixaAberto }: { caixaAberto: boolean, setCaixaAberto: (v: boolean) => void }) {
+export default function PDV({ caixaAberto, setCaixaAberto }: { caixaAberto: boolean, setCaixaAberto: (v: boolean) => void }) {
   const [busca, setBusca] = useState('');
   const [carrinho, setCarrinho] = useState<{ produto: Produto; qtd: number }[]>([]);
   const [showCheckout, setShowCheckout] = useState(false);
@@ -594,4 +594,3 @@ function Lock(props: any) {
   )
 }
 
-export default PDV;

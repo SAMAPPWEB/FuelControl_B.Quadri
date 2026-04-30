@@ -2,15 +2,15 @@ import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAuth } from '@/hooks/useAuth';
 import { Layout, type AppScreen } from '@/components/Layout';
-import { Login } from '@/pages/Login';
-import { Dashboard } from '@/pages/Dashboard';
-import { Abastecimento } from '@/pages/Abastecimento';
-import { Relatorios } from '@/pages/Relatorios';
-import { Configuracoes } from '@/pages/Configuracoes';
-import { ModuleSelection } from '@/components/ModuleSelection';
-import { PDV } from './pages/Loja/PDV';
-import { Estoque } from './pages/Loja/Estoque';
-import { DashboardLoja } from './pages/Loja/DashboardLoja';
+import Login from '@/pages/Login';
+import Dashboard from '@/pages/Dashboard';
+import Abastecimento from '@/pages/Abastecimento';
+import Relatorios from '@/pages/Relatorios';
+import Configuracoes from '@/pages/Configuracoes';
+import ModuleSelection from '@/components/ModuleSelection';
+import PDV from './pages/Loja/PDV';
+import Estoque from './pages/Loja/Estoque';
+import DashboardLoja from './pages/Loja/DashboardLoja';
 import type { ModuleId } from '@/types';
 
 function App() {
