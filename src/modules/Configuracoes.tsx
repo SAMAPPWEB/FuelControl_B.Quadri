@@ -466,11 +466,11 @@ function CombustivelConfig() {
     setEditingId(null);
   };
 
-  const handleEntry = (fuelId: string) => {
+  const handleEntry = async (fuelId: string) => {
     const qtd = parseFloat(entryForm.qtd);
     const fuel = combustiveis.find(f => f.id === fuelId);
     if (fuel && !isNaN(qtd)) {
-      updateCombustivel(fuelId, {
+      await updateCombustivel(fuelId, {
         estoqueLitros: fuel.estoqueLitros + qtd,
         precoCusto: parseFloat(entryForm.custo) || fuel.precoCusto
       });

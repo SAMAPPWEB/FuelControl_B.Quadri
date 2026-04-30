@@ -9,13 +9,12 @@ export async function POST(request: Request) {
 
     if (!id) return NextResponse.json({ success: false, error: 'ID não fornecido' }, { status: 400 });
 
-    const updateData = {
-      preco_custo: parseFloat(body.precoCusto || 0),
-      preco_venda: parseFloat(body.precoVenda || 0),
-      estoque_litros: parseFloat(body.estoqueLitros || 0),
-      limite_minimo: parseFloat(body.limiteMinimo || 0),
-      alerta_abaixo_de: parseFloat(body.alertaAbaixoDe || 0)
-    };
+    const updateData: any = {};
+    if (body.precoCusto !== undefined) updateData.preco_custo = parseFloat(body.precoCusto);
+    if (body.precoVenda !== undefined) updateData.preco_venda = parseFloat(body.precoVenda);
+    if (body.estoqueLitros !== undefined) updateData.estoque_litros = parseFloat(body.estoqueLitros);
+    if (body.limiteMinimo !== undefined) updateData.limite_minimo = parseFloat(body.limiteMinimo);
+    if (body.alertaAbaixoDe !== undefined) updateData.alerta_abaixo_de = parseFloat(body.alertaAbaixoDe);
 
     const { error } = await supabase
       .from('combustiveis')
