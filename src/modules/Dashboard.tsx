@@ -199,9 +199,9 @@ export default function Dashboard({ onScreenChange }: { onScreenChange?: (s: any
           <div className="glass-card rounded-[2.5rem] p-8 shadow-glass neon-gold">
             <h3 className="text-lg font-bold text-foreground mb-6">Metas do Dia</h3>
             <div className="space-y-6">
-              <ProgressItem label="Volume Vendas" percent={78} color="bg-brand-blue" />
-              <ProgressItem label="Meta Faturamento" percent={45} color="bg-brand-purple" />
-              <ProgressItem label="Diesel S-10" percent={92} color="bg-green-500" />
+              <ProgressItem label="Volume Vendas" percent={0} color="bg-brand-blue" />
+              <ProgressItem label="Meta Faturamento" percent={0} color="bg-brand-purple" />
+              <ProgressItem label="Diesel S-10" percent={0} color="bg-green-500" />
             </div>
           </div>
         </div>
