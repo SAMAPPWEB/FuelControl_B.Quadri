@@ -769,7 +769,6 @@ function EmpresaConfig() {
   };
 
   const handleSave = async () => {
-    alert('CLICOU NO BOTÃO!');
     setIsSaving(true);
     try {
       await saveEmpresa({ 
