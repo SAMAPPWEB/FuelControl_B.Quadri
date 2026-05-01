@@ -754,6 +754,7 @@ function EmpresaConfig() {
     logoUrl: empresa?.logoUrl || '',
   });
   const [saved, setSaved] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -768,6 +769,7 @@ function EmpresaConfig() {
   };
 
   const handleSave = async () => {
+    setIsSaving(true);
     try {
       await saveEmpresa({ 
         id: empresa?.id || '1', 
@@ -778,6 +780,8 @@ function EmpresaConfig() {
     } catch (error: any) {
       console.error(error);
       alert('Erro ao salvar: ' + (error.message || 'Erro desconhecido na API'));
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -825,10 +829,27 @@ function EmpresaConfig() {
 
         <button
           onClick={handleSave}
-          className="w-full bg-brand-gradient py-5 rounded-2xl text-white font-black uppercase tracking-[0.2em] shadow-brand hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-3"
+          disabled={isSaving}
+          className={`w-full py-5 rounded-2xl text-white font-black uppercase tracking-[0.2em] shadow-brand hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-3 ${
+            saved ? 'bg-green-500' : 'bg-brand-gradient'
+          } disabled:opacity-50`}
         >
-          {saved ? <Check size={20} /> : <Save size={20} />}
-          {saved ? 'Dados Sincronizados' : 'Salvar Alterações'}
+          {isSaving ? (
+            <>
+              <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              Salvando...
+            </>
+          ) : saved ? (
+            <>
+              <Check size={20} />
+              Dados Sincronizados
+            </>
+          ) : (
+            <>
+              <Save size={20} />
+              Salvar Alterações
+            </>
+          )}
         </button>
       </div>
     </div>
