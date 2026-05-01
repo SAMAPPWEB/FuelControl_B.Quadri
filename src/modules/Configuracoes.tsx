@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users, Fuel, Truck, Building2, Pencil, Trash2, UserPlus,
@@ -758,6 +758,18 @@ function EmpresaConfig() {
     logoUrl: empresa?.logoUrl || '',
   });
   const [saved, setSaved] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setForm({ ...form, logoUrl: reader.result as string });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleSave = async () => {
     await saveEmpresa({ id: 'empresa-1', ...form });
@@ -774,18 +786,28 @@ function EmpresaConfig() {
 
       <div className="bg-white/80 backdrop-blur-md p-10 rounded-[3rem] border border-black/5 space-y-8 shadow-sm neon-gold">
         <div className="flex flex-col items-center gap-4 py-4">
-           <div className="w-32 h-32 rounded-[2rem] bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden group relative">
-             {form.logoUrl ? (
-               <img src={form.logoUrl} className="w-full h-full object-cover" />
-             ) : (
-               <Building2 size={40} className="text-dark-muted" />
-             )}
-             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center cursor-pointer transition-all">
-               <Upload size={20} className="text-white" />
-             </div>
-           </div>
-           <p className="text-[10px] font-bold text-dark-muted uppercase tracking-[0.2em]">Logomarca da Unidade</p>
-        </div>
+            <input 
+              type="file" 
+              ref={fileInputRef} 
+              onChange={handleFileChange} 
+              className="hidden" 
+              accept="image/*" 
+            />
+            <div 
+              onClick={() => fileInputRef.current?.click()}
+              className="w-32 h-32 rounded-[2rem] bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden group relative cursor-pointer"
+            >
+              {form.logoUrl ? (
+                <img src={form.logoUrl} className="w-full h-full object-cover" />
+              ) : (
+                <Building2 size={40} className="text-dark-muted" />
+              )}
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all">
+                <Upload size={20} className="text-white" />
+              </div>
+            </div>
+            <p className="text-[10px] font-bold text-dark-muted uppercase tracking-[0.2em]">Logomarca da Unidade</p>
+         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <PremiumInput label="Razão Social" value={form.razaoSocial} onChange={(v: string) => setForm({...form, razaoSocial: v})} />
