@@ -627,7 +627,7 @@ function CombustivelConfig() {
                 <th className="py-4 px-4 text-right">Volume</th>
                 <th className="py-4 px-4 text-right">Preço Custo</th>
                 <th className="py-4 px-4 text-right">Operador</th>
-                <th className="py-4 px-4 text-right">Ações</th>
+                <th className="py-4 px-4 text-right w-20">Ações</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-black/5">
