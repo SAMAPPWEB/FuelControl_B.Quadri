@@ -627,6 +627,7 @@ function CombustivelConfig() {
                 <th className="py-4 px-4 text-right">Volume</th>
                 <th className="py-4 px-4 text-right">Preço Custo</th>
                 <th className="py-4 px-4 text-right">Operador</th>
+                <th className="py-4 px-4 text-right">Ações</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-black/5">
@@ -647,6 +648,11 @@ function CombustivelConfig() {
                     <td className="py-4 px-4 text-right text-sm font-black text-foreground">+{h.qtd} L</td>
                     <td className="py-4 px-4 text-right text-sm font-bold text-dark-muted">R$ {h.custo.toFixed(2)}</td>
                     <td className="py-4 px-4 text-right text-xs font-black text-brand-blue uppercase tracking-tighter">{h.user}</td>
+                    <td className="py-4 px-4 text-right">
+                      <button className="p-2 rounded-lg bg-brand-blue/10 text-brand-blue hover:bg-brand-blue hover:text-white transition-all active:scale-90">
+                        <Pencil size={14} />
+                      </button>
+                    </td>
                   </tr>
                 );
               })}
