@@ -21,21 +21,34 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const body = await request.json();
-  const { id, ...empresaData } = body;
-  let targetId = id;
-  
-  // Se não temos ID, tentamos buscar o registro existente para atualizar
-  if (!targetId) {
-    const { data: existing } = await supabase.from('empresa').select('id').single();
-    if (existing) targetId = existing.id;
+  try {
+    if (!supabase) {
+      return NextResponse.json({ success: true, message: 'Modo demonstração: Simulação de salvamento' });
+    }
+
+    const body = await request.json();
+    const { id, ...empresaData } = body;
+    let targetId = id;
+    
+    // Se não temos ID, tentamos buscar o registro existente para atualizar
+    if (!targetId) {
+      const { data: existing } = await supabase.from('empresa').select('id').maybeSingle();
+      if (existing) targetId = existing.id;
+    }
+
+    // Se ainda não temos ID e a tabela está vazia, deixamos o Supabase gerar um (ou usamos um padrão se necessário)
+    const payload = targetId ? { id: targetId, ...empresaData } : empresaData;
+
+    const { error } = await supabase.from('empresa').upsert(payload);
+    
+    if (error) {
+      console.error('Supabase Upsert Error:', error);
+      return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (err: any) {
+    console.error('POST Empresa Error:', err);
+    return NextResponse.json({ success: false, error: err.message || 'Erro interno no servidor' }, { status: 500 });
   }
-
-  const { error } = await supabase.from('empresa').upsert({ 
-    ...(targetId ? { id: targetId } : {}), 
-    ...empresaData 
-  });
-  if (error) return NextResponse.json({ success: false, error: error.message }, { status: 500 });
-
-  return NextResponse.json({ success: true });
 }
