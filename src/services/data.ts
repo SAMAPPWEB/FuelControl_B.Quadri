@@ -131,5 +131,19 @@ export class DataService {
       return false;
     }
   }
+
+  // Histórico de Entradas
+  static async getHistoricoEntradas(): Promise<any[]> {
+    const res = await ApiService.get<any>('/api/data/historico');
+    return res.historico || [];
+  }
+
+  static async saveHistoricoEntrada(dados: any): Promise<void> {
+    await ApiService.post('/api/data/historico', dados);
+  }
+
+  static async deleteHistoricoEntrada(id: string): Promise<void> {
+    await ApiService.post('/api/data/historico', { action: 'delete', id });
+  }
 }
 

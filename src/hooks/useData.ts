@@ -8,6 +8,7 @@ export function useData() {
   const [empresa, setEmpresa] = useState<Empresa | null>(null);
   const [abastecimentos, setAbastecimentos] = useState<Abastecimento[]>([]);
   const [alertas, setAlertas] = useState<AlertaEmergencial[]>([]);
+  const [historicoEntradas, setHistoricoEntradas] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshKey, setRefreshKey] = useState(0);
 
@@ -17,18 +18,20 @@ export function useData() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const [users, fuels, company, supplies, alerts] = await Promise.all([
+        const [users, fuels, company, supplies, alerts, history] = await Promise.all([
           DataService.getUsuarios(),
           DataService.getCombustiveis(),
           DataService.getEmpresa(),
           DataService.getAbastecimentos(),
-          DataService.getAlertas()
+          DataService.getAlertas(),
+          DataService.getHistoricoEntradas()
         ]);
         setUsuarios(users);
         setCombustiveis(fuels);
         setEmpresa(company);
         setAbastecimentos(supplies);
         setAlertas(alerts);
+        setHistoricoEntradas(history);
       } catch (error) {
         console.error('Erro ao buscar dados:', error);
       } finally {
@@ -54,5 +57,8 @@ export function useData() {
     saveEmpresa: async (e: Empresa) => { await DataService.saveEmpresa(e); refresh(); },
     createAbastecimento: async (a: Omit<Abastecimento, 'id' | 'createdAt'>) => { await DataService.createAbastecimento(a); refresh(); },
     marcarAlertaLido: async (id: string) => { await DataService.marcarAlertaLido(id); refresh(); },
+    historicoEntradas,
+    saveHistoricoEntrada: async (d: any) => { await DataService.saveHistoricoEntrada(d); refresh(); },
+    deleteHistoricoEntrada: async (id: string) => { await DataService.deleteHistoricoEntrada(id); refresh(); },
   };
 }

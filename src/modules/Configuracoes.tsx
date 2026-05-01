@@ -432,7 +432,13 @@ function ModuleCard({ title, desc, icon: Icon, active, color }: any) {
 
 /* ================= COMBUSTIVEL ================= */
 function CombustivelConfig() {
-  const { combustiveis = [], updateCombustivel } = useData();
+  const { 
+    combustiveis = [], 
+    updateCombustivel, 
+    historicoEntradas = [],
+    saveHistoricoEntrada,
+    deleteHistoricoEntrada 
+  } = useData();
   const [editingId, setEditingId] = useState<string | null>(null);
   const [showHistory, setShowHistory] = useState<string | null>(null);
   const [showEntry, setShowEntry] = useState<string | null>(null);
@@ -440,8 +446,8 @@ function CombustivelConfig() {
   const [entryForm, setEntryForm] = useState({ qtd: '', custo: '' });
   const [editingHistory, setEditingHistory] = useState<any>(null);
 
-  // Mock de histórico para demonstração visual
-  const [historico, setHistorico] = useState<any[]>([]);
+  // Histórico agora vem do useData
+  const historico = historicoEntradas;
 
   const startEdit = (c: any) => {
     setEditingId(c.id);
@@ -469,39 +475,21 @@ function CombustivelConfig() {
     const fuel = combustiveis.find(f => String(f.id) === String(fuelId));
     
     if (fuel && !isNaN(qtd)) {
-      if (editingHistory) {
-        // Ajuste de estoque na edição: novo = atual - anterior + novo
-        const delta = qtd - editingHistory.qtd;
-        await updateCombustivel(fuelId, {
-          estoqueLitros: fuel.estoqueLitros + delta,
-          precoCusto: custo || fuel.precoCusto
-        });
+      // 1. Salvar no histórico persistente
+      await saveHistoricoEntrada({
+        combustivel_id: String(fuelId),
+        quantidade: qtd,
+        preco_custo: custo || fuel.precoCusto,
+        usuario: 'Admin',
+        data: new Date().toISOString()
+      });
 
-        setHistorico(historico.map(h => 
-          h.id === editingHistory.id 
-            ? { ...h, qtd, custo: custo || h.custo } 
-            : h
-        ));
-      } else {
-        // Nova entrada normal
-        await updateCombustivel(fuelId, {
-          estoqueLitros: fuel.estoqueLitros + qtd,
-          precoCusto: custo || fuel.precoCusto
-        });
-        
-        setHistorico([
-          { 
-            id: Math.random().toString(), 
-            fuelId, 
-            data: new Date().toLocaleString('pt-BR').slice(0, 16), 
-            qtd, 
-            custo: custo || fuel.precoCusto, 
-            user: 'Admin' 
-          },
-          ...historico
-        ]);
-      }
-      
+      // 2. Atualizar o estoque
+      await updateCombustivel(fuelId, {
+        estoqueLitros: (fuel.estoqueLitros || 0) + qtd,
+        precoCusto: custo || fuel.precoCusto
+      });
+
       setShowEntry(null);
       setEditingHistory(null);
       setEntryForm({ qtd: '', custo: '' });
