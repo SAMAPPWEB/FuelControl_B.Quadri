@@ -66,7 +66,17 @@ export class DataService {
   }
 
   static async saveEmpresa(empresa: Empresa): Promise<void> {
-    await ApiService.post('/api/data/empresa', empresa);
+    const data = {
+      id: empresa.id,
+      razao_social: empresa.razaoSocial,
+      nome_fantasia: empresa.nomeFantasia,
+      cnpj: empresa.cnpj,
+      endereco: empresa.endereco,
+      whatsapp: empresa.whatsapp,
+      pix_key: empresa.pixKey,
+      logo_url: empresa.logoUrl
+    };
+    await ApiService.post('/api/data/empresa', data);
   }
 
   // Abastecimentos

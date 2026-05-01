@@ -24,13 +24,8 @@ export async function POST(request: Request) {
   const body = await request.json();
   const { id, ...empresaData } = body;
 
-  if (id) {
-    const { error } = await supabase.from('empresa').update(empresaData).eq('id', id);
-    if (error) return NextResponse.json({ success: false, error: error.message }, { status: 500 });
-  } else {
-    const { error } = await supabase.from('empresa').insert([empresaData]);
-    if (error) return NextResponse.json({ success: false, error: error.message }, { status: 500 });
-  }
+  const { error } = await supabase.from('empresa').upsert({ id, ...empresaData });
+  if (error) return NextResponse.json({ success: false, error: error.message }, { status: 500 });
 
   return NextResponse.json({ success: true });
 }

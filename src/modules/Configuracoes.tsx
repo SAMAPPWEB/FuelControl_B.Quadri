@@ -772,7 +772,10 @@ function EmpresaConfig() {
   };
 
   const handleSave = async () => {
-    await saveEmpresa({ id: 'empresa-1', ...form });
+    await saveEmpresa({ 
+      id: empresa?.id || '1', 
+      ...form 
+    });
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);
   };
