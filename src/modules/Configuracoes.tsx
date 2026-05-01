@@ -438,6 +438,7 @@ function CombustivelConfig() {
   const [showEntry, setShowEntry] = useState<string | null>(null);
   const [form, setForm] = useState<any>({});
   const [entryForm, setEntryForm] = useState({ qtd: '', custo: '' });
+  const [editingHistory, setEditingHistory] = useState<any>(null);
 
   // Mock de histórico para demonstração visual
   const [historico, setHistorico] = useState([
@@ -468,24 +469,45 @@ function CombustivelConfig() {
 
   const handleEntry = async (fuelId: string) => {
     const qtd = parseFloat(entryForm.qtd);
-    const fuel = combustiveis.find(f => f.id === fuelId);
+    const custo = parseFloat(entryForm.custo);
+    const fuel = combustiveis.find(f => String(f.id) === String(fuelId));
+    
     if (fuel && !isNaN(qtd)) {
-      await updateCombustivel(fuelId, {
-        estoqueLitros: fuel.estoqueLitros + qtd,
-        precoCusto: parseFloat(entryForm.custo) || fuel.precoCusto
-      });
-      setHistorico([
-        { 
-          id: Math.random().toString(), 
-          fuelId, 
-          data: new Date().toLocaleString('pt-BR').slice(0, 16), 
-          qtd, 
-          custo: parseFloat(entryForm.custo) || fuel.precoCusto, 
-          user: 'Admin' 
-        },
-        ...historico
-      ]);
+      if (editingHistory) {
+        // Ajuste de estoque na edição: novo = atual - anterior + novo
+        const delta = qtd - editingHistory.qtd;
+        await updateCombustivel(fuelId, {
+          estoqueLitros: fuel.estoqueLitros + delta,
+          precoCusto: custo || fuel.precoCusto
+        });
+
+        setHistorico(historico.map(h => 
+          h.id === editingHistory.id 
+            ? { ...h, qtd, custo: custo || h.custo } 
+            : h
+        ));
+      } else {
+        // Nova entrada normal
+        await updateCombustivel(fuelId, {
+          estoqueLitros: fuel.estoqueLitros + qtd,
+          precoCusto: custo || fuel.precoCusto
+        });
+        
+        setHistorico([
+          { 
+            id: Math.random().toString(), 
+            fuelId, 
+            data: new Date().toLocaleString('pt-BR').slice(0, 16), 
+            qtd, 
+            custo: custo || fuel.precoCusto, 
+            user: 'Admin' 
+          },
+          ...historico
+        ]);
+      }
+      
       setShowEntry(null);
+      setEditingHistory(null);
       setEntryForm({ qtd: '', custo: '' });
     }
   };
@@ -649,7 +671,14 @@ function CombustivelConfig() {
                     <td className="py-4 px-4 text-right text-sm font-bold text-dark-muted">R$ {h.custo.toFixed(2)}</td>
                     <td className="py-4 px-4 text-right text-xs font-black text-brand-blue uppercase tracking-tighter">{h.user}</td>
                     <td className="py-4 px-4 text-right">
-                      <button className="p-2 rounded-lg bg-brand-blue/10 text-brand-blue hover:bg-brand-blue hover:text-white transition-all active:scale-90">
+                      <button 
+                        onClick={() => {
+                          setEditingHistory(h);
+                          setEntryForm({ qtd: h.qtd.toString(), custo: h.custo.toString() });
+                          setShowEntry(h.fuelId);
+                        }}
+                        className="p-2 rounded-lg bg-brand-blue/10 text-brand-blue hover:bg-brand-blue hover:text-white transition-all active:scale-90"
+                      >
                         <Pencil size={14} />
                       </button>
                     </td>
@@ -675,8 +704,10 @@ function CombustivelConfig() {
               className="relative w-full max-w-md bg-white rounded-[3rem] p-10 shadow-2xl overflow-hidden"
             >
               <div className="flex items-center justify-between mb-8">
-                <h3 className="text-2xl font-black text-foreground">Entrada de <span className="text-green-500">Tanque</span></h3>
-                <button onClick={() => setShowEntry(null)} className="p-2 hover:bg-black/5 rounded-xl"><X size={24} /></button>
+                <h3 className="text-2xl font-black text-foreground">
+                  {editingHistory ? 'Editar' : 'Entrada de'} <span className="text-green-500">Tanque</span>
+                </h3>
+                <button onClick={() => { setShowEntry(null); setEditingHistory(null); setEntryForm({ qtd: '', custo: '' }); }} className="p-2 hover:bg-black/5 rounded-xl"><X size={24} /></button>
               </div>
 
               <div className="space-y-6">
