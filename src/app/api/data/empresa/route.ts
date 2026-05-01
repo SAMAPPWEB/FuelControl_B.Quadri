@@ -22,9 +22,18 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { id, ...empresaData } = body;
+  let targetId = id;
+  
+  // Se não temos ID, tentamos buscar o registro existente para atualizar
+  if (!targetId) {
+    const { data: existing } = await supabase.from('empresa').select('id').single();
+    if (existing) targetId = existing.id;
+  }
 
-  const { error } = await supabase.from('empresa').upsert({ id, ...empresaData });
+  const { error } = await supabase.from('empresa').upsert({ 
+    ...(targetId ? { id: targetId } : {}), 
+    ...empresaData 
+  });
   if (error) return NextResponse.json({ success: false, error: error.message }, { status: 500 });
 
   return NextResponse.json({ success: true });
