@@ -753,6 +753,22 @@ function EmpresaConfig() {
     pixKey: empresa?.pixKey || '',
     logoUrl: empresa?.logoUrl || '',
   });
+
+  // Sincronizar formulário quando os dados da empresa forem carregados
+  useEffect(() => {
+    if (empresa) {
+      setForm({
+        razaoSocial: empresa.razaoSocial || '',
+        nomeFantasia: empresa.nomeFantasia || '',
+        cnpj: empresa.cnpj || '',
+        endereco: empresa.endereco || '',
+        whatsapp: empresa.whatsapp || '',
+        pixKey: empresa.pixKey || '',
+        logoUrl: empresa.logoUrl || '',
+      });
+    }
+  }, [empresa]);
+
   const [saved, setSaved] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
