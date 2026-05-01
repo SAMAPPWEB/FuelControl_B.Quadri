@@ -768,12 +768,17 @@ function EmpresaConfig() {
   };
 
   const handleSave = async () => {
-    await saveEmpresa({ 
-      id: empresa?.id || '1', 
-      ...form 
-    });
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+    try {
+      await saveEmpresa({ 
+        id: empresa?.id || '1', 
+        ...form 
+      });
+      setSaved(true);
+      setTimeout(() => setSaved(false), 3000);
+    } catch (error: any) {
+      console.error(error);
+      alert('Erro ao salvar: ' + (error.message || 'Erro desconhecido na API'));
+    }
   };
 
   return (

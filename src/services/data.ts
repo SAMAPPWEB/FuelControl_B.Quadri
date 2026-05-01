@@ -73,6 +73,7 @@ export class DataService {
       cnpj: empresa.cnpj,
       endereco: empresa.endereco,
       whatsapp: empresa.whatsapp,
+      telefone: empresa.whatsapp, // Compatibilidade com nomes antigos
       pix_key: empresa.pixKey,
       logo_url: empresa.logoUrl
     };
