@@ -22,6 +22,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const body = await request.json();
+  const { id, ...empresaData } = body;
   let targetId = id;
   
   // Se não temos ID, tentamos buscar o registro existente para atualizar
