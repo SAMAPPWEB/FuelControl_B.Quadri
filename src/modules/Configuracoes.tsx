@@ -441,11 +441,7 @@ function CombustivelConfig() {
   const [editingHistory, setEditingHistory] = useState<any>(null);
 
   // Mock de histórico para demonstração visual
-  const [historico, setHistorico] = useState([
-    { id: '1', fuelId: '1', data: '2026-04-30 09:45', qtd: 2500, custo: 5.42, user: 'Admin' },
-    { id: '2', fuelId: '2', data: '2026-04-29 14:20', qtd: 1800, custo: 4.65, user: 'Gerente' },
-    { id: '3', fuelId: '1', data: '2026-04-25 08:00', qtd: 3000, custo: 5.38, user: 'Admin' },
-  ]);
+  const [historico, setHistorico] = useState<any[]>([]);
 
   const startEdit = (c: any) => {
     setEditingId(c.id);
